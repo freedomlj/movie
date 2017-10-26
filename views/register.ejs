@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="bootstrap-2\css\bootstrap.min.css">
+    <script type="text/javascript" src="\javascripts\xheditor\jquery\jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="\bootstrap-2\js\bootstrap.min.js"></script>
+    <script src="\javascripts\public.js"></script>
+    <title>注册</title>
+    <style>
+        .users{
+            width: 500px;
+            height: 40px;
+            border: 1px solid #eee;
+            line-height: 40px;
+        }
+        .hint{
+            margin: 0;
+            height: 30px;
+            line-height: 30px;
+            color: #ccc;
+            font-size: 12px;
+        }
+        .users .word{
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+        .users #random{
+            display: inline-block;
+            width: 110px;
+            height: 38px;
+            text-align: center;
+            font-size: 14px;
+            color: #ff5400;
+            background: #eee;
+        }
+        #verify{
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            width: 110px;
+            height: 40px;
+            background: #ddd;
+        }
+        #register{
+            background: #FF0000;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            width: 500px;
+        }
+        .register_ipt{
+            width: 355px;
+            height: 35px;
+            border: none !important;
+            outline: none !important;
+            margin-bottom: 3px !important;
+            transition: none !important;
+            border-color: #fff !important;
+            box-shadow: inset 0 1px 1px rgb(255, 255, 255), 0 0 8px rgb(255, 255, 255) !important;
+        }
+        .checknum{
+            width: 248px !important;
+        }
+        #code{
+            width: 110px;
+            height: 38px;
+        }
+    </style>
+</head>
+<body>
+        <!-- <%- include("header",{title:"注册"})%> -->
+    <!-- <form action="/users/register" method="post">
+        <input type="text" name="username" placeholder="用户名">
+        <input type="password" name="password" placeholder="密码">
+        <input type="text" name="email" placeholder="邮箱">
+        <input type="submit" value="注册">
+    </form> -->
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                             <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">最叼电影网</a>
+                            <div class="nav-collapse collapse navbar-responsive-collapse">
+                                <ul class="nav">
+                                    <li class="active">
+                                        <a href="/">主页</a>
+                                    </li>
+                                    <li>
+                                        <a href="/login">登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="/register">注册</a>
+                                    </li>
+                                    <li>
+                                        <a href="/movie">所有电影</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li>
+                                        <a href="#">右边链接</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="alert">
+                     <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4>
+                        提示!
+                    </h4> <strong>警告!</strong> 请注意你的个人隐私安全.
+                </div>
+                
+                    
+            </div>
+        </div>
+    </div>
+   
+    <!-- 注册 -->
+    <div class="row-fluid">
+        <div class="span2">
+        </div>
+        <div class="span8">
+            <form action="" method="">
+                <!-- <div class="control-group">
+                    <label class="control-label" for="inputUsername">用户名</label>
+                    <div class="controls">
+                        <input id="inputUsername" type="text" name="username" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">密码</label>
+                    <div class="controls">
+                        <input id="inputPassword" type="password" name="password"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">注册</button>
+                    </div>
+                </div> -->
+                <div class="users">
+                    <span class="word">用 户 名</span>
+                    <input type="text" name="username" class="register_ipt username" placeholder="请输入用户名"/>
+                </div>
+                <p class="hint"></p>
+                
+                <div class="users">
+                    <span class="word">设 置 密 码</span>
+                    <input type="password" name="password" class="register_ipt password" placeholder="建议至少使用两种字符组合"/>
+                </div>
+                <p class="hint"></p>
+                
+                <div class="users">
+                    <span class="word">确 认 密 码</span>
+                    <input type="password" class="register_ipt repassword" placeholder="请再次输入密码"/>
+                </div>
+                <p class="hint"></p>
+                
+                <div class="users">
+                    <span class="word">中国 00806</span>
+                    <input type="text" name="phone" class="register_ipt phone" placeholder="建议使用常用手机"/>
+                </div>
+                <p class="hint"></p>
+                
+                <div class="users">
+                    <span class="word">验证码</span>
+                    <input type="text" class="register_ipt checknum" placeholder="请输入验证码"/>
+                    <span href="#" id="random">
+                        <em id="randomword">点击获取验证码</em> 
+                        <img src="" alt="" id="code">
+                    </span>
+                </div>
+                <p class="hint"></p>
+                
+                <input type="button" id="register" value="立即注册" />
+            </form>
+        </div>
+        <div class="span2">
+        </div>
+    </div>
+
+    <script>
+            //用户名
+            $(".username").focus(function(){
+                $(this).parent().css("borderColor","#FF0000");
+                $(this).parent().next().html("支持中文、字母、数字、\"-\" \"_\" 的组合，4-20个字符");
+                $(this).parent().next().css("color","#ccc");
+            })
+            $(".username").blur(function(){
+                $(this).parent().css("borderColor","#eee");
+                if(/^((\w)|([\u2E80-\u9FFF]|-)){4,20}$/.test($(this).val())){
+                    //查询用户名是否已注册
+                    var _this=$(this);
+                    $.get("/users/username",{username:$(this).val()},function(data){
+                        if(data=="0"){
+                            _this.parent().css("borderColor","#FF0000");
+                            _this.parent().next().html("用户名已存在").css("color","red")
+                        }else{
+                            _this.parent().next().html("用户名可用").css("color","#09C762")
+                            _this.parent().next().css("color","#22ff0b");
+                            _this.parent().css("borderColor","#22ff0b");
+                        }
+                    },"json");
+                }else{
+                    $(this).parent().next().html("仅支持中文、字母、数字、\"-\" \"_\" 的组合，4-20个字符");
+                    $(this).parent().next().css("color","red");
+                    $(this).parent().css("borderColor","#FF0000");
+                }
+            })
+            //密码
+            $(".password").focus(function(){
+                $(this).parent().css("borderColor","#FF0000");
+                $(this).parent().next().html("建议使用字母，数字和符号两种及以上的组合，6-20个字符");
+                $(this).parent().next().css("color","#ccc");
+            })
+            $(".password").blur(function(){
+                $(this).parent().css("borderColor","#eee");
+                if(/^(\w){6,20}$/.test($(this).val())){
+                    if($(this).val().length<=10){
+                        $(this).parent().next().html("密码安全度低，建议使用组合密码");
+                        $(this).parent().next().css("color","#ff800f");
+                        $(this).parent().css("borderColor","#ff800f");
+                    }else if($(this).val().length<=15){
+                        $(this).parent().next().html("密码强度中等，建议使用组合密码");
+                        $(this).parent().next().css("color","#ffd100");
+                        $(this).parent().css("borderColor","#ffd100");
+                    }else {
+                        $(this).parent().next().html("密码强度高");
+                        $(this).parent().next().css("color","#22ff0b");
+                        $(this).parent().css("borderColor","#22ff0b");
+                    }
+                    
+                }else{
+                    $(this).parent().next().html("请输入符合规则的密码");
+                    $(this).parent().next().css("color","red");
+                    $(this).parent().css("borderColor","#FF0000");
+                }
+            })
+            
+            //确认密码
+            $(".repassword").focus(function(){
+                $(this).parent().css("borderColor","#FF0000");
+                $(this).parent().next().html("请再次输入密码");
+                $(this).parent().next().css("color","#ccc");
+            })
+            $(".repassword").blur(function(){
+                $(this).parent().css("borderColor","#eee");
+                if($(this).val()==$(".password").val()){
+                    $(this).parent().next().html("正确");
+                    $(this).parent().next().css("color","#22ff0b");
+                    $(this).parent().css("borderColor","#22ff0b");
+                }else{
+                    $(this).parent().next().html("两次输入密码不一致");
+                    $(this).parent().next().css("color","red");
+                    $(this).parent().css("borderColor","#FF0000");
+                }
+            })
+            
+            //手机号
+            $(".phone").focus(function(){
+                $(this).parent().css("borderColor","#FF0000");
+                $(this).parent().next().html("完成验证后，你可以用该手机登录和找回密码");
+                $(this).parent().next().css("color","#ccc");
+            })
+            $(".phone").blur(function(){
+                $(this).parent().css("borderColor","#eee");
+                if(/^1\d{10}$/.test($(this).val())){
+                    $(this).parent().next().html("正确");
+                    $(this).parent().next().css("color","#22ff0b");
+                    $(this).parent().css("borderColor","#22ff0b");
+                }else{
+                    $(this).parent().next().html("格式错误");
+                    $(this).parent().next().css("color","red");
+                    $(this).parent().css("borderColor","#FF0000");
+                }
+            })
+            
+            //生成验证码
+            
+
+            $("#random").click(function(){
+                $("#randomword").remove();
+                var apiurl = "http://route.showapi.com/932-2?showapi_appid=29550&showapi_sign=08402fce064a484baad949d9a18f75e7&length=4&specials=false";
+                $.getJSON(apiurl, function(data){
+                    $("#code").attr("src", data.showapi_res_body.image)
+                    $("#code").data("sid", data.showapi_res_body.sid);
+                });
+            })
+             //验证 验证码
+             $(".checknum").focus(function(){
+                $(this).parent().css("borderColor","#FF0000");
+             })
+             $(".checknum").blur(function(){
+                $(this).parent().css("borderColor","#eee");
+             })
+            
+            //注册
+            $("#register").click(function(){
+                var key = 1;
+                $(".users").each((index,item)=>{
+                    if($(item).css("borderColor")=="rgb(255, 0, 0)"||$(item).children().eq(1).val()==""){
+                        key = 0;
+                        return false;
+                    }
+                })
+                if(key==0){
+                    return false;
+                }else{
+                    var _input = $(".checknum").val();
+                    var _url = "http://route.showapi.com/932-1?showapi_appid=29550&showapi_sign=08402fce064a484baad949d9a18f75e7&checkcode="+ _input +"&sid=" + $("#code").data("sid");
+                    $.getJSON(_url, function(data){
+                        if (data.showapi_res_body.valid) {
+                            alert("注册成功");
+                            $.ajax({
+                                url:"/users/register",
+                                type:"post",
+                                data:{
+                                    username:$(".username").val(),
+                                    password:$(".password").val(),
+                                    phone:$(".phone").val()
+                                },
+                                success:function(data){
+                                    document.write(data)
+                                }
+                            })
+                        } else {
+                            alert("验证码错误");
+                            return false;
+                        }
+                    })
+                }
+                
+            })
+                
+            
+        </script>
+</body>
+</html>

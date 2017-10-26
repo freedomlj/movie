@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/bootstrap-2\css\bootstrap.min.css">
+    <script type="text/javascript" src="\javascripts\xheditor\jquery\jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="\bootstrap-2\js\bootstrap.min.js"></script>
+    <script src="\javascripts\public.js"></script>
+    <title>登录</title>
+    <style>
+        .loginimg{
+            width: 768px;
+            height: 432px;
+            float: left;
+        }
+        .loginimg img{
+            width: 100%;
+            height: 100%;
+        }
+        .loginbox{
+            margin-top: 20px;
+            float: left;
+            width: 350px;
+        }
+        .loginbtn{
+            width: 221px;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+    </style>
+</head>
+<body>
+        <!-- <%- include("header",{title:"登录"})%>
+    <form action="/users/login" method="post">
+        <input type="text" name="username" placeholder="用户名">
+        <input type="password" name="password" placeholder="密码">
+        <input type="submit" value="登录">
+    </form> -->
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                             <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">最叼电影网</a>
+                            <div class="nav-collapse collapse navbar-responsive-collapse">
+                                <ul class="nav">
+                                    <li class="active">
+                                        <a href="/">主页</a>
+                                    </li>
+                                    <li>
+                                        <a href="/login">登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="/register">注册</a>
+                                    </li>
+                                    <li>
+                                        <a href="/movie">所有电影</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li>
+                                        <a href="#">右边链接</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                    
+            </div>
+        </div>
+    </div>
+
+    <div class="loginimg">
+        <img src="images/img/loginimg.jpg" alt="">
+    </div>         
+
+    <!-- 登录 -->
+    <div class="row-fluid loginbox">
+        <div class="span2">
+        </div>
+        <div class="span8">
+            <form action="/users/login" method="post">
+                <div class="control-group">
+                    <label class="control-label" for="inputUsername">用户名</label>
+                    <div class="controls">
+                        <input id="inputUsername" type="text" name="username" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPassword">密码</label>
+                    <div class="controls">
+                        <input id="inputPassword" type="password" name="password"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn loginbtn">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="span2">
+        </div>
+    </div>
+</body>
+</html>

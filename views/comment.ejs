@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel="stylesheet" href="/bootstrap-2\css\bootstrap.min.css">
+    <script type="text/javascript" src="\javascripts\xheditor\jquery\jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="\bootstrap-2\js\bootstrap.min.js"></script>
+	<script type="text/javascript" src="/javascripts/xheditor/xheditor-1.2.2.min.js"></script>
+	<script type="text/javascript" src="/javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
+	<script src="\javascripts\public.js"></script>
+	<title>评论</title>
+	<style>
+		.xheLayout{
+			width: 100% !important;
+			height: 100% !important;
+		}
+	</style>
+</head>
+<body>
+	<!-- <%- include("header",{title:"评论电影"})%> -->
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container-fluid">
+								<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">最叼电影网</a>
+							<div class="nav-collapse collapse navbar-responsive-collapse">
+								<ul class="nav">
+									<li class="active">
+										<a href="/">主页</a>
+									</li>
+									<% if(!username){ %>
+									<li>
+										<a href="/login">登录</a>
+									</li>
+									<li>
+										<a href="/register">注册</a>
+									</li>
+									<% }else{ %>
+									<li>
+										<a href="/users/"><%- username%></a>
+									</li>
+									<li>
+										<a href="/logout">退出登录</a>
+									</li>
+									<% } %>
+									<li>
+										<a href="/movie">所有电影</a>
+									</li>
+								</ul>
+								<ul class="nav pull-right">
+									<li>
+										<a href="#">右边链接</a>
+									</li>
+									<li class="divider-vertical">
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <section>
+        <div class="mbox">
+            <h1 class="tit1"><%- result.title%></h1>
+            <div>
+                <img src="<%- result.images.large%>" alt="">
+            </div>
+        </div>
+        <form action="/comment/submit?id=<%-result.id%>" method="post" class="mcomment">
+            <span>评论</span>
+            <p>
+                <textarea name="content" placeholder="评论" rows="20" cols="100" id="content"></textarea>
+            </p>
+            <p>
+                <input type="submit" class="btn btn-info" value="提交评论"> 
+            </p>
+        </form>
+    </section>
+    <script type="text/javascript">
+		$(pageInit);
+
+		//  comment.ejs  /comment/index
+		function pageInit(){
+            $.extend(XHEDITOR.settings,{shortcuts:{"ctrl+enter":submitForm}});
+            // $("#ele").xheditor();
+			$("#content").xheditor({   //初始化 富文件编辑框
+				html5Upload:false,
+				upMultiple:"1",
+
+				upLinkRrl:"upload.html",
+				upLinkExt:"zip,rar,txt",
+
+				upImgUrl:"/comment/uploadImg",
+				upImgExt:"jpg,jpeg,gif,png",
+
+				upFlashUrl:"upload.php",
+				upFlashExt:"swf",
+
+				upMediaUrl:"upload.php",
+				upMediaExt:"wmv,avi,wma,mp3,mid"
+
+			});
+		};
+
+		function insertUpload(arrMsg){
+			console.log(arrMsg);
+			var i,msg;
+			for(var i=0;i<arrMsg.length;i++){
+				msg=arrMsg[i];
+				console.log(msg);
+				$("#uploadList").append('<option value="'+msg.id+'">'+msg.localname+'</option>')
+			}
+		};
+
+		function submitForm(){
+			$("#frmDemo").submit();
+		}
+	</script>
+</body>
+</html>

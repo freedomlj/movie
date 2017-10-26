@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="\bootstrap\css\bootstrap.min.css">
+    <script type="text/javascript" src="\bootstrap\css\bootstrap.min.js"></script> -->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/bootstrap-2\css\bootstrap.min.css">
+    <script type="text/javascript" src="\javascripts\xheditor\jquery\jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="\bootstrap-2\js\bootstrap.min.js"></script>
+    <script src="\javascripts\public.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        ul,li{list-style: none;}
+        #banner{position: relative;height: 280px;margin:30px auto;overflow: hidden;}
+        #banner ul{position: absolute;left: 0;margin: 0}
+        #banner ul li{float: left}
+        #banner ul li img{width: 978px;;height: 280px;}
+        .direction{display: none;}
+        .direction a{width:60px;height: 40px;display: block;background:rgba(255,255,255,0.3);font-size: 30px;text-align: center;line-height: 40px;color: #fff;position: absolute;text-decoration: none;}
+        .direction a:nth-child(1){left:0;top:120px;}
+        .direction a:nth-child(2){right:0;top:120px;}
+        .btns{position: absolute;bottom: 0;left:40%;}
+        .btns a{float: left;width:20px;height: 20px;background: #ccc;border-radius: 50%;margin-left: 10px;}
+        .btns .active{background: yellow;}
+
+        .hot_movie dl dd p{
+            font-size: 12px;
+            margin: 0;
+        }
+        .mlabel{
+            color: #999;
+        }
+    </style>
+  </head>
+  <body>
+      <!-- <%- include("header",{title:"首页"})%>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/users/"><%- username%></a>
+    <% if(!username){ %>
+      <button onclick="window.location='/login'">登录</button> 
+      <button onclick="window.location='/register'">注册</button> 
+    <% }else{ %>
+      <button onclick="window.location='/movie'">所有电影</button>
+      <button onclick="window.location='/logout'">注销</button> 
+    <% } %> -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                             <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">最叼电影网</a>
+                            <div class="nav-collapse collapse navbar-responsive-collapse">
+                                <ul class="nav">
+                                    <li class="active">
+                                        <a href="/">主页</a>
+                                    </li>
+                                    <% if(!username){ %>
+                                    <li>
+                                        <a href="/login">登录</a>
+                                    </li>
+                                    <li>
+                                        <a href="/register">注册</a>
+                                    </li>
+                                    <% }else{ %>
+                                    <li>
+                                        <a href="/users/"><%- username%></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">退出登录</a>
+                                    </li>
+                                    <% } %>
+                                    <li>
+                                        <a href="/movie">所有电影</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li>
+                                        <a href="#">右边链接</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 轮播图 -->
+    <div id="banner">
+        <ul id="list">
+            <li><img src="images/img/035ed4c89351e92932a035d0a46ce04db1735157.jpg@1160w_332h.jpg" alt=""></li>
+            <li><img src="images/img/83261842334a4546e749f5f21182bbcaa23d25ae.jpg@1160w_332h.jpg" alt=""></li>
+            <li><img src="images/img/cbd2eaf3a9709c1b67cb444fc3904f9b7a31b575.jpg@1160w_332h.jpg" alt=""></li>
+            <li><img src="images/img/9dbe9b8822df5089db6872f2dab3e4ac91e7d11d.jpg@1160w_332h.jpg" alt=""></li>
+        </ul>
+        <div class="direction">
+            <a href="##">&lt;</a>
+            <a href="##">&gt;</a>
+        </div>
+        <div class="btns">
+            <a href="##" class="active"></a>
+            <a href="##"></a>
+            <a href="##"></a>
+            <a href="##"></a>
+        </div>
+    </div>
+
+    <div class="hot_movie movie">
+        
+    </div>
+    <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp" alt="">
+  </body>
+  <script>
+        $(function(){
+            
+            $.ajax({
+                url:"https://api.douban.com/v2/movie/in_theaters",
+                type:"get",
+                dataType:"jsonp",
+                success:function(data){
+                    console.log(data.subjects)
+                    var str = "";
+                    data.subjects.forEach((item,index)=>{
+                        var mlabel = "";
+                        item.genres.forEach((val,idx)=>{
+                            mlabel+=val+" ";
+                        });
+                        str+=`<dl>
+                            <dt><img src="${item.images.large}" alt=""></dt>
+                            <dd>
+                                <p class="mname">${item.title}</p>
+                                <p class="mlabel">${mlabel}</p>
+                            </dd>
+                        </dl>`
+                    })
+                    $(".hot_movie").html(str);
+                }
+            })
+
+            //轮播图
+            var obanner = $('#banner');//整体
+            var oList = $('#list');//ul
+            var aLi = $('#list>li');//li图片
+            var dir = $(".direction")
+            var aA = $('.direction>a');//左右按钮
+            var oBtn = $('.btns');
+            var aCircel = $('.btns>a');//小圆点
+            
+            var iNow = 0;
+            //设置ul的宽度
+            var li = oList.children().eq(0).clone();
+            oList.append(li);
+            var aLi = $('#list>li');//再次获取li图片
+            oList.width(aLi.length*aLi.eq(0).outerWidth());
+            //设置banner的宽度
+            obanner.width(aLi.eq(0).outerWidth());
+            
+        
+            //左
+            aA.eq(0).click(function(){
+                if(iNow==0){
+                    
+                    iNow=aLi.length-1;
+                    oList.css("left",iNow*-aLi.eq(0).outerWidth());
+                }
+                iNow--;
+                toImg();
+            })
+                
+            
+            //右
+            aA.eq(1).click(function(){
+                iNow++;
+                toImg();
+            })
+        
+            //移入停止 并显示左右切换按钮
+            obanner.mouseover(function(){
+                clearInterval(timer)
+                dir.css("display","block");
+            })
+            
+            //移开运行 并隐藏左右切换按钮
+            obanner.mouseout(function(){
+                timer = setInterval(function(){
+                     iNow++;
+                     toImg()
+                },2500)
+                dir.css("display","none");
+            })
+            
+            //自动轮播
+            timer = setInterval(function(){
+                 iNow++;
+                 toImg()
+            },2500)
+        
+            //小圆点切换
+            function tab(){
+                for(var i=0;i<aCircel.length;i++){
+                    aCircel.eq(i).removeClass('active');
+                }
+                aCircel.eq(iNow==aLi.length-1?0:iNow).addClass('active');
+            }
+            
+            //小圆点悬停切换
+            for(var j=0;j<aCircel.length;j++){
+                aCircel.eq(j).mouseover(function(){
+                    iNow=$(this).index();
+                    tab();
+                    oList.stop(true).animate({left:iNow*-aLi.eq(0).outerWidth()},500)
+                })
+            }
+        
+            //图片轮播
+            function toImg(){
+                if(iNow==aLi.length){
+                    iNow=1
+                    oList.css("left",0);
+                }
+                // console.log(iNow);
+                tab()
+                oList.stop(true).animate({left:iNow*-aLi.eq(0).outerWidth()},500)
+            }
+        })
+            
+        </script>
+</html>
