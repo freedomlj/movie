@@ -9,6 +9,7 @@ var session = require("express-session");
 var index = require('./routes/index');
 var users = require('./routes/users');
 var comment = require('./routes/comment');  // 评论模块 
+var administrator = require('./routes/administrator')  //管理员模块
 
 var app = express();   // app  集成express 各种功能
 
@@ -37,6 +38,7 @@ app.use(session({
 app.use('/', index);
 app.use('/users', users);
 app.use("/comment",comment);  // /comment 
+app.use('/administrator',administrator) 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

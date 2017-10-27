@@ -159,7 +159,7 @@ header{
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.userbox .pagebtnbox a{
+.pagebtnbox a{
   text-decoration: none;
   color: #999;
   display: block;
@@ -176,7 +176,7 @@ header{
   color: #6fe5f7 !important;
 }
 #recontent{
-  width: 546px;
+  width: 543px !important;
   height: 230px;
   resize:none;
 }

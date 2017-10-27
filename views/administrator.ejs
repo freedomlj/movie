@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/bootstrap-2\css\bootstrap.min.css">
+    <script type="text/javascript" src="\javascripts\xheditor\jquery\jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="\bootstrap-2\js\bootstrap.min.js"></script>
+    <script src="\javascripts\public.js"></script>
+    <title>管理员后台</title>
+    <style>
+        .users{
+            max-width: 1200px;
+            height: 40px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .uname{
+            width: 27%;
+        }
+        .utime{
+            width: 27%;
+        }
+        .udelete{
+            width: 27%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                             <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">最叼电影网</a>
+                            <div class="nav-collapse collapse navbar-responsive-collapse">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="/administrator">管理员:<%- username%></a>
+                                    </li>
+                                    <li>
+                                        <a href="/logout">注销</a>
+                                    </li>
+                                    <li>
+                                        <a href="/administrator/">用户管理</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li>
+                                        <a href="#">右边链接</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                    
+            </div>
+        </div>
+    </div>
+
+    <ul>
+        <h4>用户管理</h4>
+        <% result.forEach((item,index)=>{ %>
+            <li class="users">
+                <span class="uname">用户名:<a href="/administrator/adcomment?uid=<%- item.username%>"><%- item.username%></a></span>
+                <span class="utime">注册时间:<%- item.time%></span>
+                <a href="/administrator/delete?uid=<%- item.username%>" class="udelete">删除</a>
+            </li>
+        <% }) %>
+        
+    </ul>
+
+    
+</body>
+</html>

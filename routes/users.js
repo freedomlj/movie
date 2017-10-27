@@ -29,7 +29,8 @@ router.post("/register",(req,res)=>{
             if(!arg){
               console.log("没注册,可以插入");
               var date = new Date();
-              conn.insert({username:username,password:password,phone:phone,time:date},(err,result)=>{
+              var d = date.toLocaleString();
+              conn.insert({username:username,password:password,phone:phone,time:d},(err,result)=>{
                 if(err) throw err;
                 console.log(result);
                 callback(null,"0")
@@ -65,9 +66,8 @@ router.post("/register",(req,res)=>{
   
   
     // res.send("注册成功");
-  })
+})
   
-
 /* GET users listing. */
 
 router.get("/username",(req,res)=>{
@@ -154,7 +154,7 @@ router.get('/', function(req, res){
       })
     })
   }else{
-    res.send(`<script>alert('session已经过期,请重新登录!');location.href='/login'</script>`)
+    res.send(`<script>alert('登录超时,请重新登录!');location.href='/login'</script>`)
   }
 });
 
@@ -162,33 +162,80 @@ router.get('/', function(req, res){
 router.post("/login",(req,res)=>{
   var username = req.body.username;
   var password = req.body.password;
-
-  var findData = function(db,callback){
-    var conn = db.collection("user");
-    var data = {username:username,password:password};
-    conn.find(data).toArray((err,result)=>{
-      if(err) throw err;
-      callback(result);
-    })
-  }
+  var data = {username:username,password:password};
+  // var findData = function(db,callback){
+  //   var conn = db.collection("user");
+  //   var data = {username:username,password:password};
+  //   conn.find(data).toArray((err,result)=>{
+  //     if(err) throw err;
+  //     callback(result);
+  //   })
+  // }
 
   MongoClient.connect(CONN_DB_STR,(err,db)=>{
     if(err) throw err;
     console.log("数据库连接成功")
-    findData(db,(result)=>{
-      if(result.length>0){
-        console.log("查询到数据");
+    // findData(db,(result)=>{
+    //   if(result.length>0){
+    //     console.log("查询到数据");
         
-        req.session.username = username;
-        console.log(req.session)
+    //     req.session.username = username;
+    //     console.log(req.session)
+    //     res.redirect("/");
+    //   }else{
+    //     console.log("未查询到数据");
+    //     res.send(`<script>alert('用户名或密码错误');location.href='/login'</script>`)
+    //   }
+    // })
+    var user = db.collection("user");
+    var adm = db.collection("adm");
+    async.waterfall([
+      function(callback){
+        //先进行管理员账号查询
+        adm.find(data,{_id:0}).toArray((err,result)=>{
+          if(err) throw err;
+          console.log("管理员账号查询结果");
+          console.log(result);
+          if(result.length>0){
+            callback(null,true);  //true表示存在此管理员账号
+          }else{
+            callback(null,false);  //false表示不存在此管理员账号
+          }
+        })
+      },
+      function(arg,callback){
+        if(arg){
+          callback(null,2)      // 2表示可以登录管理员
+        }else{
+          user.find(data,{_id:0}).toArray((err,result)=>{
+            if(err) throw err;
+            console.log("普通用户账号查询结果");
+            console.log(result);
+            if(result.length>0){
+              callback(null,1);  // 1表示可以登录普通用户
+            }else{
+              callback(null,false); // false表示登录失败
+            }
+          })
+        }
+      }
+    ],function(err,result){
+      if(err) throw err;
+      console.log("登录判断")
+      console.log(result);
+      if(result==2){
+        req.session.username=username;
+        res.redirect("/administrator/");
+      }else if(result==1){
+        req.session.username=username;
         res.redirect("/");
       }else{
-        console.log("未查询到数据");
-        res.send(`<script>alert('用户名或密码错误');location.href='/login'</script>`)
+        res.send(`<script>alert('用户名或密码错误');location.href='/login'</script>`);
       }
     })
   })
 })
+
 
 // 删除评论
 router.get("/delete",(req,res)=>{

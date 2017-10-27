@@ -21,7 +21,7 @@
         .direction a{width:60px;height: 40px;display: block;background:rgba(255,255,255,0.3);font-size: 30px;text-align: center;line-height: 40px;color: #fff;position: absolute;text-decoration: none;}
         .direction a:nth-child(1){left:0;top:120px;}
         .direction a:nth-child(2){right:0;top:120px;}
-        .btns{position: absolute;bottom: 0;left:40%;}
+        .btns{position: absolute;bottom: 0;left:43%;}
         .btns a{float: left;width:20px;height: 20px;background: #ccc;border-radius: 50%;margin-left: 10px;}
         .btns .active{background: yellow;}
 
@@ -115,30 +115,32 @@
     <div class="hot_movie movie">
         
     </div>
-    <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp" alt="">
   </body>
   <script>
         $(function(){
             
             $.ajax({
                 url:"https://api.douban.com/v2/movie/in_theaters",
-                type:"get",
+                type:"get", 
                 dataType:"jsonp",
                 success:function(data){
-                    console.log(data.subjects)
                     var str = "";
                     data.subjects.forEach((item,index)=>{
+                        var reg = new RegExp("/photo/s_ratio_poster/");
+                        item.images.large = item.images.large.replace(reg,"/movie_poster_cover/lpst/");
                         var mlabel = "";
                         item.genres.forEach((val,idx)=>{
                             mlabel+=val+" ";
                         });
                         str+=`<dl>
-                            <dt><img src="${item.images.large}" alt=""></dt>
-                            <dd>
-                                <p class="mname">${item.title}</p>
-                                <p class="mlabel">${mlabel}</p>
-                            </dd>
-                        </dl>`
+                                <a href="${item.alt}">
+                                    <dt><img src="${item.images.large}" alt=""></dt>
+                                    <dd>
+                                        <p class="mname">${item.title}</p>
+                                        <p class="mlabel">${mlabel}</p>
+                                    </dd>
+                                </a>
+                            </dl>`
                     })
                     $(".hot_movie").html(str);
                 }

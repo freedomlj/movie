@@ -56,25 +56,6 @@ router.get('/movie',(req,res)=>{
   
 })
 
-// router.get('/comment',(req,res)=>{
-//   var username = req.session.username;
-//   if(username){
-//     var id = req.query.id
-//     mongoClient.connect(CONN_DB_STR,(err,db)=>{
-//       if(err) throw err;
-//       console.log("数据库连接成功")
-//       var conn = db.collection("movie");
-//       conn.find({id:id},{_id:0,id:1,title:1,"images.large":1}).toArray((err,result)=>{
-//         if(err) throw err;
-//         console.log("电影查询成功");
-//         console.log(result);
-//         res.render('comment',{result:result[0]})
-//       })
-//     })
-//   }else{
-//     res.send(`<script>alert("登录超时，请重新登录");location.href='/login'</script>`)
-//   }
-// })
 
 router.get("/boot",(req,res)=>{
   res.render("boot");
